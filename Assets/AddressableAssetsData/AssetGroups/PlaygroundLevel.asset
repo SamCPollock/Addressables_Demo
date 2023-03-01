@@ -41,6 +41,18 @@ MonoBehaviour:
     m_Address: Assets/Textures/1.png
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: bab203dbd4b17d644b5d2cc9c40c2008
+    m_Address: Apple
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b81b2aa50290290499d41065d68e95ff
+    m_Address: 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d3402f1eabe73c147a2d373a75dd9839
+    m_Address: Assets/Textures/5.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 57d5290359bd87c4787fac5e0f0ba140, type: 2}
   m_SchemaSet:

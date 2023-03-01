@@ -43,6 +43,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 28f9185998e8daa4db29ec42a2ed24d0, type: 2}
   - {fileID: 11400000, guid: d534c1fe5d543804abf6c96f5def78a5, type: 2}
+  - {fileID: 11400000, guid: 9bc16c0af9b84734a80d9973b22af460, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -53,6 +54,20 @@ MonoBehaviour:
     - m_InheritedParent: 
       m_Id: 31259abce1dce35459e1e485df8c748b
       m_ProfileName: Default
+      m_Values:
+      - m_Id: 6f109446d658af04f9232bdaad9288f0
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: e0a6c41dae1732346bee8e46549fcb18
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: d240e348ad716b84db4cc653fa8cd3d2
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 5805ce583d2671a47b141d41c699a93f
+        m_Value: ServerData/[BuildTarget]
+      - m_Id: 0c850217933a2e745af2554d8026dba1
+        m_Value: https://caa49ecd-4d8c-4413-a47e-9337cea19850.client-api.unity3dusercontent.com/client_api/v1/environments/production/buckets/f21a7fec-9a7d-4f25-97cc-23c43479d60b/release_by_badge/latest/entry_by_path/content/?path=/[BuildTarget]
+    - m_InheritedParent: 
+      m_Id: d5c48f0ab45a132449894914136ac894
+      m_ProfileName: Profile2
       m_Values:
       - m_Id: 6f109446d658af04f9232bdaad9288f0
         m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
