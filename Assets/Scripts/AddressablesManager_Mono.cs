@@ -7,6 +7,8 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
+using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [Serializable]
@@ -25,10 +27,16 @@ public class AddressablesManager_Mono : MonoBehaviour
 
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
 
+    private GameObject playerController;
+
     // UI Components
     [SerializeField] private RawImage rawImageUnityLogo;
+    
+    // Level Loading
+    private bool clearPreviousScene = false;
+    private SceneInstance previousLoadedScene; 
+    
 
-    private GameObject playerControllerGO;
     void Start()
     {
         Debug.Log("Initializing Addressables...");
@@ -38,12 +46,15 @@ public class AddressablesManager_Mono : MonoBehaviour
     private void AddressablesManager_Completed(AsyncOperationHandle<IResourceLocator> obj)
     {
         Debug.Log("Initialized Addressables...");
-        playerArmatureAssetReference.InstantiateAsync().Completed += (go) =>
+        playerArmatureAssetReference.LoadAssetAsync<GameObject>().Completed += (playerArmatureAsset) =>
         {
-            playerControllerGO = go.Result;
-            cinemachineVirtualCamera.Follow = playerControllerGO.transform.Find("PlayerCameraRoot");
-            Debug.Log("Instantiated Player...");
-
+            Debug.Log("Loading Player...");
+            playerArmatureAssetReference.InstantiateAsync().Completed += (playerArmatureGameObject) =>
+            {
+                playerController = playerArmatureGameObject.Result;
+                cinemachineVirtualCamera.Follow = playerController.transform.Find("PlayerCameraRoot");
+                Debug.Log("Instantiated Player..."); 
+            };
         };
 
         musicAssetReference.LoadAssetAsync<AudioClip>().Completed += (clip) =>
@@ -75,10 +86,29 @@ public class AddressablesManager_Mono : MonoBehaviour
         }
     }
 
-
-    private void OnDestroy()
+    public void LoadAddressableLevel(string addressableKey)
     {
-        playerArmatureAssetReference.ReleaseInstance(playerControllerGO);
-        logoAssetReference.ReleaseAsset();
+        if (clearPreviousScene)
+        {
+            Addressables.UnloadSceneAsync(previousLoadedScene).Completed += (asyncHandle) =>
+            {
+                clearPreviousScene = false;
+                previousLoadedScene = new SceneInstance();
+            };
+        }
+        else
+        {
+            Addressables.LoadSceneAsync(addressableKey, LoadSceneMode.Additive).Completed += (asyncHandle) =>
+            {
+                clearPreviousScene = true;
+                previousLoadedScene = asyncHandle.Result;
+            };
+        }
     }
+    
+    /*private void OnDestroy()
+    {
+        playerArmatureAssetReference.ReleaseInstance(playerController);
+        logoAssetReference.ReleaseAsset();
+    }*/
 }
